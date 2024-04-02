@@ -1,5 +1,11 @@
-# Use the official Node.js 14 image
-FROM node:14
+# Use the official Node.js 18 image
+FROM node:18
+
+# Install nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Install Node.js 18 using nvm
+RUN /bin/bash -c "source /root/.nvm/nvm.sh && nvm install 18 && nvm use 18"
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
