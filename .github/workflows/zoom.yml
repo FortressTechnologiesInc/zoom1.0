@@ -16,6 +16,11 @@ jobs:
       with:
         node-version: '21'
         
+    - name: Install Trivy
+      run: |
+        wget https://github.com/aquasecurity/trivy/releases/download/v0.24.0/trivy_0.24.0_Linux-64bit.deb
+        sudo dpkg -i trivy_0.24.0_Linux-64bit.deb
+        
     - name: Trivy FS Scan
       run: |
         trivy fs --format table -o trivy-fs-report.html .
@@ -44,6 +49,4 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Push Docker Image
-      run: |
-          docker push limkel/zoom:2.0
+    
